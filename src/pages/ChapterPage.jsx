@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SelectMenu from '../components/SelectMenu';
 import NavBar from '../components/NavBar';
-//import { Highlight } from 'Highlight.js';
+
+import { Context } from '../pages/_Home';
+
 
 export function ChapterPage({ book, chapter }) {
     const [verses, setVerses] = useState([]);
-    const [language, setLanguage] = useState('english');
+    const [language, setLanguage] = useContext(Context);
 
-    useEffect(() => {
+
+    /*useEffect(() => {
         const fetchVerses = async () => {
             try {
                 let path = `././bom/bom-${language}/${book.urlName}/${chapter}.txt`;
@@ -22,21 +25,15 @@ export function ChapterPage({ book, chapter }) {
         };
 
         fetchVerses();
-    }, [book.urlName, chapter, language]);
-
-    const handleLanguageChange = (lang) => {
-        setLanguage(lang);
-    }
+    }, [book.urlName, chapter, language]);*/
 
     return (
         <>
             <NavBar book={book} chapter={chapter} />
             <SelectMenu />
             <h1>The Book of {book.bookName} Chapter {chapter}</h1>
-            <button onClick={() => handleLanguageChange('spanish')}>Spanish</button>
-            <button onClick={() => handleLanguageChange('english')}>English</button>
-            <button onClick={() => handleLanguageChange('french')}>French</button>
             {verses}
+            <h1>{langauge}</h1>
         </>
     );
 }

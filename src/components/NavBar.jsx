@@ -1,21 +1,24 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './NavBar.css'
 import Path from './Path';
 
-const NavBar = ({ book, chapter }) => {
-    // State to manage the visibility of the dropdown
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+import { Context } from '../pages/_Home';
 
-    // Function to open the dropdown
+const NavBar = ({ book, chapter }) => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const openDropdown = () => {
         setIsDropdownOpen(true);
     };
-
-    // Function to close the dropdown
     const closeDropdown = () => {
         setIsDropdownOpen(false);
     };
+
+    const [language, setLanguage] = useContext(Context);
+
+    const handleLanguageChange = (lang) => {
+        setLanguage(lang);
+    }
 
     return (
         <nav className="navbar">
@@ -29,14 +32,10 @@ const NavBar = ({ book, chapter }) => {
                 <button className="dropbtn">Languages</button>
                 {isDropdownOpen && (
                     <div className="dropdown-content">
-                        <button>English</button>
-                        <button>Spanish</button>
-                        <button>German</button>
-                        <button>French</button>
-                        <button>Russian</button>
-                        <button>Mongolian</button>
-                        <button>Kantoneese</button>
-                        <button>Finnish</button>
+                        <button onClick={() => handleLanguageChange('english')}>English</button>
+                        <button onClick={() => handleLanguageChange('spanish')}>Spanish</button>
+                        <button onClick={() => handleLanguageChange('german')}>German</button>
+                        <button onClick={() => handleLanguageChange('french')}>French</button>
                     </div>
                 )}
             </div>
