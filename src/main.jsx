@@ -6,6 +6,7 @@ import { BookPage } from './pages/BookPage'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
 import books from './books';
 import { ChapterPage } from './pages/ChapterPage'
+import NavBar from './components/NavBar'
 let routerList = [];
 
 //each books page
@@ -40,5 +41,7 @@ const router = createHashRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  <>
+    <RouterProvider router={router} />
+  </>
 )

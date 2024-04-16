@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import NavBar from "../components/NavBar";
 
 export function BookPage({ book }) {
     const chapterLinks = [];
@@ -10,6 +11,7 @@ export function BookPage({ book }) {
 
     return (
         <>
+            <NavBar book={book} chapter={undefined} />
             <h1>The Book of {book.bookName}</h1>
             {chapterLinks}
         </>

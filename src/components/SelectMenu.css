@@ -1,0 +1,36 @@
+.highlightBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+    /* Ensure it's above other elements */
+}
+
+
+.highlightBox::after {
+    /*  this is from chat gpt*/
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    /* Adjust to position the caret */
+    left: 50%;
+    /* Center the caret horizontally */
+    transform: translateX(-50%);
+    /* Center the caret horizontally */
+    border-width: 10px;
+    /* Adjust the size of the caret */
+    border-style: solid;
+    border-color: rgb(30, 30, 30) transparent transparent transparent;
+    /* Adjust the color of the caret */
+}
+
+
+.material-symbols-outlined {
+    /*width: 20px;*/
+}
