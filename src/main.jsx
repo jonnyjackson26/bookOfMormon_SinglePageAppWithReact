@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { Home } from './pages/_Home'
@@ -37,11 +37,20 @@ const router = createHashRouter([
   ...routerList
 ])
 
+export const Context = React.createContext();
 
+function Main() {
+
+  const [language, setLanguage] = useState('english');
+
+  return (
+    <Context.Provider value={[language, setLanguage]}>
+      <RouterProvider router={router} />
+    </Context.Provider>
+  )
+}
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <>
-    <RouterProvider router={router} />
-  </>
+  <Main />
 )

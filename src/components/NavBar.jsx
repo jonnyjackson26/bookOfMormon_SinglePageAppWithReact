@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
 import './NavBar.css'
 import Path from './Path';
+import books from '../books';
+import myData from "../../languages/_languages.js"
 
-import { Context } from '../pages/_Home';
+import { Context } from "../main";
 
 const NavBar = ({ book, chapter }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,34 +17,40 @@ const NavBar = ({ book, chapter }) => {
 
     const [language, setLanguage] = useContext(Context);
 
-    const handleLanguageChange = (lang) => {
+    const handleLanguageChange = async (lang) => {
         setLanguage(lang);
     }
 
     return (
         <nav className="navbar">
             <div className="brand">
-                <a href="#">Logo</a>
+                <a href="#"><img src="public/bomLogo.png" alt="BOM.COM" className='icon'></img></a>
             </div>
 
             <Path book={book} chapter={chapter} />
 
             <div className="dropdown" onMouseEnter={openDropdown} onMouseLeave={closeDropdown}>
-                <button className="dropbtn">Languages</button>
+                <button className="dropbtn">
+                    <img src="public/language.png" alt="languages" className='icon'></img>
+                </button>
+
                 {isDropdownOpen && (
                     <div className="dropdown-content">
-                        <button onClick={() => handleLanguageChange('english')}>English</button>
-                        <button onClick={() => handleLanguageChange('spanish')}>Spanish</button>
-                        <button onClick={() => handleLanguageChange('german')}>German</button>
-                        <button onClick={() => handleLanguageChange('french')}>French</button>
+                        {Object.keys(myData).map((langKey) => (
+                            <button key={langKey} onClick={() => handleLanguageChange(langKey)}>
+                                {myData[langKey][langKey]} / {myData[language][langKey]}
+                                {/* will show all of the languages in the dropdown menu */}
+                            </button>
+                        ))}
                     </div>
                 )}
             </div>
             <ul className="nav-links">
-                <li><a href="#">Log in</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <ul className="nav-links">
+                    <li><img src="public/account.png" alt="account" className='icon'></img></li>
+                    <li><img src="public/menu.png" alt="menu" className='icon'></img></li>
+                </ul>
+
             </ul>
         </nav>
     );

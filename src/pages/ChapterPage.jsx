@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SelectMenu from '../components/SelectMenu';
 import NavBar from '../components/NavBar';
+import { theBookOfBOOKNAMEchapterX } from "../../languages/_languages.js"
 
-import { Context } from '../pages/_Home';
+import { Context } from "../main";
 
 
 export function ChapterPage({ book, chapter }) {
@@ -11,13 +12,13 @@ export function ChapterPage({ book, chapter }) {
     const [language, setLanguage] = useContext(Context);
 
 
-    /*useEffect(() => {
+    useEffect(() => {
         const fetchVerses = async () => {
             try {
                 let path = `././bom/bom-${language}/${book.urlName}/${chapter}.txt`;
                 const response = await fetch(path);
                 const text = await response.text();
-                const lines = text.split('\n');
+                const lines = text.split('\n').slice(0, -1); //I slice because the text files have an empty \n at the end
                 setVerses(lines.map((line, index) => <p key={index}> {index + 1} {line}</p>));
             } catch (error) {
                 console.error('Error fetching verses:', error);
@@ -25,15 +26,17 @@ export function ChapterPage({ book, chapter }) {
         };
 
         fetchVerses();
-    }, [book.urlName, chapter, language]);*/
+    }, [book.urlName, chapter, language]);
 
     return (
         <>
             <NavBar book={book} chapter={chapter} />
             <SelectMenu />
-            <h1>The Book of {book.bookName} Chapter {chapter}</h1>
+            <h1>
+                {theBookOfBOOKNAMEchapterX(language, book.bookName, chapter)}
+            </h1>
+
             {verses}
-            <h1>{langauge}</h1>
         </>
     );
 }

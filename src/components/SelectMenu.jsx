@@ -79,9 +79,9 @@ const SelectMenu = () => {
             {selection && position && (
                 <div className="highlightBox"
                     style={{ transform: `translate3d(${position.x}px, ${position.y}px, 0)` }}>
-                    <button title="Copy" class="material-symbols-outlined" onClick={copyContent}>content_copy</button>
-                    <button title="Share" class="material-symbols-outlined" onClick={shareContent}>share</button>
-                    <button title="Highlight" class="material-symbols-outlined" onClick={highlightContent}>format_ink_highlighter</button>
+                    <button title="Copy" className="material-symbols-outlined" onClick={copyContent}>content_copy</button>
+                    <button title="Share" className="material-symbols-outlined" onClick={shareContent}>share</button>
+                    <button title="Highlight" className="material-symbols-outlined" onClick={highlightContent}>format_ink_highlighter</button>
                 </div >
             )}
         </>

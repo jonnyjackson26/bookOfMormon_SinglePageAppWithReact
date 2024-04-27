@@ -28,6 +28,4 @@ const books = [
     new Book(15, "Ether", "ether"),
     new Book(10, "Moroni", "moroni")
 ];
-
-
 export default books;

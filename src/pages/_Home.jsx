@@ -2,25 +2,26 @@ import { Link } from "react-router-dom"
 import React, { useState, useEffect, useContext } from 'react';
 import books from '../books';
 import NavBar from "../components/NavBar";
+import myData from "../../languages/_languages.js"
 
+import { Context } from "../main"; //can make custom hook
 
-export const Context = React.createContext();
 
 export function Home() {
-
-    const [language, setLanguage] = useState('english');
+    const [language, setLanguage] = useContext(Context);
 
     return (
-        <Context.Provider value={[language, setLanguage]}>
+        <>
             <NavBar book={undefined} chapter={undefined} />
             <h1>
-                {language === 'spanish'
-                    ? 'El libro de Mormón: otro testamento de Jesucristo'
-                    : 'The Book of Mormon: Another Testament of Jesus Christ'}
+                {myData[language]["book-of-mormon"]} {/*The Book of Mormon: Another Testament of Jesus Christ*/}
             </h1>
+
             {books.map((book) => (
-                <Link key={book.urlName} to={`/${book.urlName}`}>{book.bookName}</Link>
+                <Link key={book.urlName} to={`/${book.urlName}`}>
+                    {myData[language][book.urlName]} {/* Worte von Mormon or Words of Mormon */}
+                </Link>
             ))}
-        </Context.Provider>
+        </>
     )
 }

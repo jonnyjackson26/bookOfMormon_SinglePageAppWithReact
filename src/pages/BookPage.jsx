@@ -2,27 +2,27 @@ import { Link } from "react-router-dom"
 import NavBar from "../components/NavBar";
 import React, { useState, useEffect, useContext } from 'react';
 
-import { Context } from '../pages/_Home';
+import myData, { theBookOfBOOKNAME } from "../../languages/_languages.js"
+
+import { Context } from "../main";
 
 export function BookPage({ book }) {
+    const [language, setLanguage] = useContext(Context);
+
     const chapterLinks = [];
     for (let i = 1; i <= book.numOfChapters; i++) {
         chapterLinks.push(
-            <Link key={i} to={`${i}`}>Chapter {i}</Link>
+            <Link key={i} to={`${i}`}>{myData[language]["chapter"]} {i}</Link> // Chapter 6 or Capitulo 6
         );
     }
-
-    const [language, setLanguage] = useContext(Context);
 
     return (
         <>
             <NavBar book={book} chapter={undefined} />
             <h1>
-                {language === 'spanish'
-                    ? `El libro de ${book.bookName}`
-                    : `The Book of ${book.bookName}`}
+                {theBookOfBOOKNAME(language, book.bookName)} {/* The Book of Jacob, or El Libro de Jacob etc */}
             </h1>
-            <h3>lang: {language}</h3>
+
             {chapterLinks}
         </>
     );
